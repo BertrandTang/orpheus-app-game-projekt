@@ -18,14 +18,11 @@ export default function Game() {
                 (choice === 'higher' && score > baseNumber) ||
                 (choice === 'lower' && baseNumber > score);
 
-            Alert.alert(
-                'You\'ve got the winner ?',
-                winner ? 'won' : 'lost',
-                [{
-                    text: `You scored: ${score}`,
-                    onPress: () => navigation.goBack(),
-                }]
-            );
+            navigation.navigate('Result', {
+                winner,
+                baseNumber,
+                score
+            });
         }
     }, [baseNumber, score, choice]);
 

@@ -1,10 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import { useRoute } from '@react-navigation/native';
 
 export default function Result() {
+    const route = useRoute();
+    const { winner, baseNumber, score } = route.params;
+
     return (
         <View style={styles.container}>
-            <Text>Test Result screen</Text>
+            <Text style={styles.message}>
+                You've {winner ? 'won' : 'lost'}!
+                Base number was {baseNumber} and score was {score}.
+            </Text>
+            {winner && (
+                <LottieView
+                    autoPlay
+                    style={{
+                        width: 300,
+                        height: 300,
+                    }}
+                    source={require('../assets/winner.json')}
+                />
+            )}
         </View>
     );
 }
@@ -15,5 +33,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    message: {
+        fontSize: 40,
     },
 });
